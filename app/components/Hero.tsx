@@ -61,10 +61,16 @@ export default function Hero() {
 
           <div>
             <h1 className="font-bold tracking-tight leading-[0.95]">
-              <span className="block text-white text-5xl sm:text-6xl">
+              <span
+                className="block text-white"
+                style={{ fontSize: "clamp(2rem, 5vw + 0.5rem, 3.75rem)" }}
+              >
                 Hello, I&apos;m
               </span>
-              <span className="block font-mono font-bold tracking-tight text-6xl sm:text-7xl lg:text-[6rem] mt-2 name-gradient">
+              <span
+                className="block font-mono font-bold tracking-tight mt-2 name-gradient"
+                style={{ fontSize: "clamp(2.5rem, 7.5vw + 0.5rem, 6rem)" }}
+              >
                 {[..."Mustafeez"].map((c, i) => (
                   <span
                     key={i}
@@ -75,7 +81,10 @@ export default function Hero() {
                   </span>
                 ))}
               </span>
-              <span className="block font-mono font-bold tracking-tight text-6xl sm:text-7xl lg:text-[6rem] name-gradient">
+              <span
+                className="block font-mono font-bold tracking-tight name-gradient"
+                style={{ fontSize: "clamp(2.5rem, 7.5vw + 0.5rem, 6rem)" }}
+              >
                 {[..."Ur Rehman"].map((c, i) => (
                   <span
                     key={i}
@@ -156,7 +165,7 @@ export default function Hero() {
             </a>
             </Magnetic>
 
-            <Magnetic>
+            <Magnetic className="hidden sm:flex">
             <a
               href="https://github.com/"
               target="_blank"
@@ -206,7 +215,7 @@ export default function Hero() {
                 portfolio.tsx
               </span>
             </div>
-            <pre className="p-5 text-[13px] leading-7 overflow-x-auto font-mono">
+            <pre className="p-3 sm:p-5 text-[10.5px] sm:text-[12px] lg:text-[13px] leading-5 sm:leading-6 lg:leading-7 overflow-x-auto font-mono">
               <code>
                 {codeSnippet.split("\n").map((fullLine, i) => {
                   const startOffset = codeSnippet
@@ -221,8 +230,8 @@ export default function Hero() {
                     typed.length > startOffset &&
                     typed.length <= startOffset + fullLine.length + 1;
                   return (
-                    <div key={i} className="flex gap-4">
-                      <span className="text-[var(--dim)] select-none w-5 text-right shrink-0">
+                    <div key={i} className="flex gap-2 sm:gap-4">
+                      <span className="text-[var(--dim)] select-none w-4 sm:w-5 text-right shrink-0">
                         {i + 1}
                       </span>
                       <span>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Counter from "./Counter";
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
@@ -115,32 +116,57 @@ export default function About() {
                     })}
                   </g>
 
-                  {/* inner core disc */}
-                  <circle cx="50" cy="50" r="36" fill="url(#avatar-core)" />
+                  {/* inner core ring (gradient outline behind photo) */}
                   <circle
                     cx="50"
                     cy="50"
                     r="36"
                     fill="none"
                     stroke="url(#avatar-grad)"
-                    strokeWidth="1.2"
-                    opacity="0.9"
+                    strokeWidth="1.4"
+                    opacity="0.95"
                   />
-
-                  {/* monogram MR */}
-                  <text
-                    x="50"
-                    y="62"
-                    textAnchor="middle"
-                    fontSize="34"
-                    fontWeight="800"
-                    fontFamily="-apple-system, BlinkMacSystemFont, system-ui, sans-serif"
-                    fill="url(#avatar-grad)"
-                    letterSpacing="-2"
-                  >
-                    MR
-                  </text>
                 </svg>
+
+                {/* portrait — clipped to circle, sits inside the inner ring */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[68%] h-[68%] rounded-full overflow-hidden ring-1 ring-[var(--accent)]/60 shadow-[0_0_22px_rgba(254,110,0,0.25)]">
+                  <Image
+                    src="/avatar.jpeg"
+                    alt="Mustafeez Ur Rehman"
+                    width={300}
+                    height={300}
+                    priority
+                    className="w-full h-full object-cover scale-125 origin-bottom"
+                    style={{ objectPosition: "center -46%" }}
+                  />
+                  {/* colorful gradient tint — site accent palette */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 pointer-events-none mix-blend-soft-light"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(254,110,0,0.55), rgba(255,92,138,0.4) 50%, rgba(48,128,255,0.5))",
+                    }}
+                  />
+                  {/* glass curvature: top sheen + bottom shade */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 pointer-events-none rounded-full"
+                    style={{
+                      boxShadow:
+                        "inset 0 1px 0 rgba(255,255,255,0.28), inset 0 14px 30px -14px rgba(255,255,255,0.22), inset 0 -12px 28px -12px rgba(0,0,0,0.4)",
+                    }}
+                  />
+                  {/* subtle terminal scanlines */}
+                  <div
+                    aria-hidden
+                    className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-30"
+                    style={{
+                      backgroundImage:
+                        "repeating-linear-gradient(0deg, rgba(0,0,0,0.45) 0 1px, transparent 1px 3px)",
+                    }}
+                  />
+                </div>
 
                 {/* online status dot */}
                 <span className="absolute bottom-1.5 right-1.5 w-3.5 h-3.5 rounded-full bg-[var(--green)] border-2 border-[var(--bg-2)] status-pulse z-10" />

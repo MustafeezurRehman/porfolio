@@ -121,7 +121,7 @@ export default function Nav() {
     <>
       <header
         ref={navRef}
-        className={`sticky top-0 z-40 backdrop-blur-2xl bg-[#0a0a0a]/65 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`sticky top-0 z-40 w-full backdrop-blur-2xl bg-[#0a0a0a]/65 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
         style={{

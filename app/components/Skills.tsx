@@ -65,11 +65,11 @@ const skills: Skill[] = [
 const RADIUS_MAX = 270;
 
 function pickRadius(w: number) {
-  if (w < 380) return 120;
-  if (w < 480) return 145;
-  if (w < 640) return 170;
-  if (w < 768) return 200;
-  if (w < 1024) return 230;
+  if (w < 380) return 140;
+  if (w < 480) return 165;
+  if (w < 640) return 190;
+  if (w < 768) return 215;
+  if (w < 1024) return 240;
   return RADIUS_MAX;
 }
 
@@ -338,7 +338,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 md:py-28 lg:py-36"
+      className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 sm:py-20 md:py-28 lg:py-36"
       style={{
         backgroundImage:
           "radial-gradient(ellipse at 50% 0%, rgba(48,128,255,0.05), transparent 60%)",
@@ -349,7 +349,7 @@ export default function Skills() {
       <div
         ref={stageRef}
         data-cursor="grab"
-        className="relative w-full h-[380px] sm:h-[460px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-4 sm:mt-8 cursor-grab active:cursor-grabbing select-none touch-none"
+        className="relative w-full h-[380px] sm:h-[460px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-8 sm:mt-8 cursor-grab active:cursor-grabbing select-none touch-none"
         style={{ perspective: "1200px" }}
       >
         <svg
@@ -399,6 +399,7 @@ export default function Skills() {
               const z = Math.round(p[2] * radius * 100) / 100;
               const translate = `translate3d(${x}px, ${y}px, ${z}px)`;
               const isHover = hover === s.name;
+              const iconSize = Math.max(22, Math.round(radius * 0.135));
               return (
                 <div
                   key={s.name}
@@ -424,8 +425,8 @@ export default function Skills() {
                   >
                     <svg
                       viewBox="0 0 24 24"
-                      width={36}
-                      height={36}
+                      width={iconSize}
+                      height={iconSize}
                       fill={s.color}
                       style={{
                         filter: isHover
@@ -459,7 +460,7 @@ export default function Skills() {
           </div>
         </div>
 
-        <div className="glass absolute -bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full text-[var(--muted)] text-xs font-mono">
+        <div className="glass absolute -bottom-14 sm:-bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full text-[var(--muted)] text-xs font-mono">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />
             <path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" />

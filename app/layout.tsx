@@ -96,9 +96,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fira.variable} ${inter.variable} ${cormorant.variable} h-full antialiased`}
+      className={`${fira.variable} ${inter.variable} ${cormorant.variable} h-full w-full overflow-x-clip antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full w-full overflow-x-clip flex flex-col">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
