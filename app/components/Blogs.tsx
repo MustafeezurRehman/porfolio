@@ -121,10 +121,6 @@ export default function Blogs() {
                 style={{
                   border: "none",
                   boxShadow: sideShadow,
-                  maskImage:
-                    "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
-                  WebkitMaskImage:
-                    "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
                 }}
               >
             <div className="luxe-thumb">
@@ -180,8 +176,8 @@ function BlogThumb({ variant, color }: { variant: Post["variant"]; color: string
       className="aspect-[16/8] relative overflow-hidden"
       style={{
         background: `
-          linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 45%, rgba(0,0,0,0.18)),
-          linear-gradient(135deg, ${color}40, transparent 65%)
+          linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0) 45%, rgba(0,0,0,0.08)),
+          linear-gradient(135deg, ${color}33, ${color}10 60%, ${color}08 100%)
         `,
         borderBottom: "1px solid rgba(255,255,255,0.1)",
         boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12)",

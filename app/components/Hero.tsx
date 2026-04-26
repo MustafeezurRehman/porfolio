@@ -31,10 +31,10 @@ export default function Hero() {
   useEffect(() => {
     let i = 0;
     const id = setInterval(() => {
-      i += 1;
+      i += 2;
       setTyped(codeSnippet.slice(0, i));
       if (i >= codeSnippet.length) clearInterval(id);
-    }, 22);
+    }, 16);
     return () => clearInterval(id);
   }, []);
 

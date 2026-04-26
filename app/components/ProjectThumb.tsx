@@ -18,9 +18,9 @@ export default function ProjectThumb({
       className="aspect-[16/8] relative overflow-hidden"
       style={{
         background: `
-          linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0) 45%, rgba(0,0,0,0.18)),
-          radial-gradient(120% 110% at 0% 0%, ${color}33, transparent 55%),
-          radial-gradient(140% 110% at 100% 100%, ${color}1f, transparent 60%)
+          linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0) 45%, rgba(0,0,0,0.08)),
+          radial-gradient(160% 130% at 0% 0%, ${color}2b, ${color}0a 70%, transparent 100%),
+          radial-gradient(180% 140% at 100% 100%, ${color}1f, ${color}08 70%, transparent 100%)
         `,
       }}
     >
