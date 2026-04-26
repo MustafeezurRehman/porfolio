@@ -248,7 +248,10 @@ export default function Hero() {
         </div>
 
         <div className="lg:sticky lg:top-32" data-parallax="0.06" data-tilt="true">
-          <div className="glass-panel rounded-md shadow-[0_0_60px_rgba(254,110,0,0.08)]">
+          <div
+            className="glass-panel rounded-md shadow-[0_0_60px_rgba(254,110,0,0.08)]"
+            style={{ border: "none" }}
+          >
             <div className="panel-header rounded-t-md">
               <span className="tl-dot bg-[#fb2c36]" />
               <span className="tl-dot bg-[#ffcc00]" />

@@ -290,6 +290,10 @@ function ProjectCard({
         boxShadow: `
           ${side === "left" ? "-12px" : "12px"} 0 24px -18px ${p.lang.color}28
         `,
+        maskImage:
+          "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
+        WebkitMaskImage:
+          "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
       }}
     >
       <div className="luxe-thumb">

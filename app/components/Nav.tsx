@@ -121,7 +121,7 @@ export default function Nav() {
     <>
       <header
         ref={navRef}
-        className={`sticky top-0 z-40 w-full backdrop-blur-2xl bg-[#0a0a0a]/65 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`sticky top-0 z-40 w-full backdrop-blur-2xl backdrop-saturate-150 bg-[#0a0a0a]/65 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           hidden ? "-translate-y-full" : "translate-y-0"
         }`}
         style={{
@@ -130,6 +130,8 @@ export default function Nav() {
             "linear-gradient(rgba(10,10,10,0.65), rgba(10,10,10,0.65)), linear-gradient(90deg, transparent, rgba(254,110,0,0.4), rgba(212,177,106,0.35), rgba(254,110,0,0.4), transparent)",
           backgroundOrigin: "padding-box, border-box",
           backgroundClip: "padding-box, border-box",
+          boxShadow:
+            "inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px -12px rgba(0,0,0,0.5)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">

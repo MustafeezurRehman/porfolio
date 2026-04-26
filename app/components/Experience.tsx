@@ -243,7 +243,7 @@ export default function Experience() {
                   className={left ? "" : "md:col-start-2"}
                   delay={i * 80}
                 >
-                  <article className="glass-panel luxe-card rounded-md">
+                  <article className="glass-panel luxe-card rounded-md" style={{ border: "none" }}>
                     <div className="px-4 sm:px-5 py-2.5 border-b border-[var(--border-bright)] flex items-center gap-3 flex-wrap">
                       <div
                         className="w-9 h-9 rounded flex items-center justify-center font-bold text-xs border shrink-0"

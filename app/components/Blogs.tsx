@@ -106,13 +106,27 @@ export default function Blogs() {
       <SectionHeader hash="$" title="ls -la ~/blogs" />
 
       <div className="grid md:grid-cols-3 gap-5">
-        {posts.map((p, i) => (
-          <Reveal
-            key={p.title}
-            as="article"
-            delay={i * 100}
-            className="glass-panel luxe-card rounded-md group overflow-hidden flex flex-col"
-          >
+        {posts.map((p, i) => {
+          const col = i % 3; // 0 = left, 1 = middle, 2 = right
+          const sideShadow =
+            col === 0
+              ? `-12px 0 24px -18px ${p.color}28`
+              : col === 2
+              ? `12px 0 24px -18px ${p.color}28`
+              : `0 0 32px -16px ${p.color}1c`;
+          return (
+            <Reveal key={p.title} delay={i * 100}>
+              <article
+                className="glass-panel luxe-card rounded-md group overflow-hidden flex flex-col"
+                style={{
+                  border: "none",
+                  boxShadow: sideShadow,
+                  maskImage:
+                    "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.85) 4%, #000 10%, #000 100%)",
+                }}
+              >
             <div className="luxe-thumb">
               <BlogThumb variant={p.variant} color={p.color} />
             </div>
@@ -143,8 +157,10 @@ export default function Blogs() {
                 read post →
               </div>
             </div>
-          </Reveal>
-        ))}
+              </article>
+            </Reveal>
+          );
+        })}
       </div>
 
       <div className="text-center mt-6 text-xs font-mono">
