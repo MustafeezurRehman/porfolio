@@ -10,7 +10,7 @@ const EMAIL = "mustafizurrehman@hotmail.com";
 const PHONE = "+971 58 542 1494";
 const LINKEDIN = "https://www.linkedin.com/in/mustafeez-ur-rehman";
 const GITHUB = "https://github.com/Mustafeez";
-const CV_URL = "/cv.pdf";
+const CV_URL = "/Mustafeez-Ur-Rehman-Resume.pdf";
 const CALENDAR_URL = "https://cal.com/mustafeez";
 
 const json = `{
@@ -61,6 +61,7 @@ export default function Contact() {
       email: String(fd.get("email") ?? ""),
       subject: String(fd.get("subject") ?? ""),
       message: String(fd.get("message") ?? ""),
+      website: String(fd.get("website") ?? ""),
     };
     try {
       const res = await fetch("/api/contact", {
@@ -121,7 +122,7 @@ export default function Contact() {
       />
 
       <div className="grid lg:grid-cols-2 gap-4">
-        <div className="glass-panel rounded-md flex flex-col">
+        <div className="glass-panel rounded-md hidden lg:flex flex-col">
           <div className="panel-header">
             <span className="tl-dot bg-[#fb2c36]" />
             <span className="tl-dot bg-[#ffcc00]" />
@@ -195,7 +196,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="glass-panel rounded-md flex flex-col">
+        <div className="glass-panel rounded-md flex flex-col min-w-0 overflow-hidden">
           <div className="panel-header">
             <span className="px-1.5 py-0.5 text-[9px] bg-[var(--blue)]/20 text-[var(--blue)] border border-[var(--blue)]/40 rounded-sm font-bold">
               TS
@@ -232,8 +233,33 @@ export default function Contact() {
             <form
               onSubmit={onSubmit}
               noValidate
-              className="p-5 grid sm:grid-cols-2 gap-3 text-sm"
+              className="p-5 grid sm:grid-cols-2 gap-3 text-sm min-w-0"
             >
+              {/* Honeypot — hidden from real users, bots fill it and get silently dropped server-side.
+                  Wrapped in a fake "label" so autofill heuristics ignore it. */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  top: "auto",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                }}
+              >
+                <label htmlFor="hp-website-do-not-fill">
+                  Leave this field empty
+                </label>
+                <input
+                  type="text"
+                  id="hp-website-do-not-fill"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="new-password"
+                  defaultValue=""
+                />
+              </div>
               <Field label="Name" name="name" error={errors.name} />
               <Field
                 label="Email"
@@ -275,11 +301,11 @@ export default function Contact() {
           )}
 
           {/* Curl example */}
-          <div className="border-t border-[var(--border-bright)] p-4 mt-auto">
+          <div className="border-t border-[var(--border-bright)] p-4 mt-auto min-w-0 overflow-hidden">
             <div className="text-[10px] text-[var(--muted)] font-mono uppercase tracking-wider mb-2">
               <span className="text-[var(--accent)]">➜</span> or via curl
             </div>
-            <pre className="text-[10.5px] leading-relaxed font-mono text-[var(--muted)] overflow-x-auto">
+            <pre className="text-[10.5px] leading-relaxed font-mono text-[var(--muted)] overflow-x-auto whitespace-pre-wrap break-all">
               <code>
                 <span className="text-[var(--accent)]">$</span> curl -X POST{" "}
                 <span className="text-[var(--cyan)]">/api/contact</span>
@@ -435,7 +461,7 @@ function Field({
     ? "border-[var(--red)]/60 focus:border-[var(--red)]"
     : "border-[var(--border-bright)] focus:border-[var(--accent)]";
   return (
-    <label className={`block ${full ? "sm:col-span-2" : ""}`}>
+    <label className={`block min-w-0 ${full ? "sm:col-span-2" : ""}`}>
       <span className="text-[10px] text-[var(--muted)] uppercase tracking-wider font-mono">
         <span className="text-[var(--accent)]">$</span> {label}
       </span>

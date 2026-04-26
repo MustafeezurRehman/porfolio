@@ -7,8 +7,8 @@ const links = [
   { href: "#home", label: "home" },
   { href: "#about", label: "about.md" },
   { href: "#skills", label: "skills.json" },
-  { href: "#experience", label: "experience.log" },
   { href: "#projects", label: "projects.repo" },
+  { href: "#experience", label: "experience.log" },
   { href: "#blogs", label: "blogs.md" },
   { href: "#contact", label: "contact.exe" },
 ];
@@ -193,21 +193,18 @@ export default function Nav() {
 
             <span className="hidden sm:inline-block h-10 w-[160px]" aria-hidden />
 
-            <button
-              type="button"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((v) => !v)}
-              className="lg:hidden inline-flex items-center justify-center w-9 h-9 border border-[var(--border-bright)] hover:border-[var(--accent)] text-[var(--foreground)] transition-colors"
+            <a
+              href="#contact"
+              aria-label="Hire Me"
+              data-cursor="hover"
+              className="lg:hidden inline-flex items-center gap-1.5 h-9 px-3 rounded-sm border border-[var(--accent)]/70 hover:border-[var(--accent)] bg-[var(--accent)]/10 hover:bg-[var(--accent)]/20 text-[var(--accent)] text-[11px] font-mono font-bold uppercase tracking-wider transition-colors"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                {open ? (
-                  <path d="M6 6l12 12M6 18L18 6" />
-                ) : (
-                  <path d="M4 7h16M4 12h16M4 17h16" />
-                )}
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] status-pulse" />
+              Hire Me
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 19L19 5M9 5h10v10" />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
 
@@ -264,7 +261,7 @@ export default function Nav() {
                   ⌘K · Quick Jump
                 </button>
                 <a
-                  href="mailto:mustafizurrehman@hotmail.com"
+                  href="#contact"
                   onClick={() => setOpen(false)}
                   className="btn-primary text-sm w-full text-center"
                 >
@@ -277,7 +274,7 @@ export default function Nav() {
       </header>
 
       <a
-        href="mailto:mustafizurrehman@hotmail.com"
+        href="#contact"
         data-cursor="hover"
         className="hire-luxe hidden sm:inline-flex fixed top-3 right-4 sm:right-6 z-50 items-stretch h-10 leading-none"
         aria-label="Hire Me"

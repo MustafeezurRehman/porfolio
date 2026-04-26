@@ -36,6 +36,13 @@ const items: Item[] = [
     ),
   },
   {
+    id: "projects",
+    label: "Projects",
+    icon: (
+      <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
+    ),
+  },
+  {
     id: "experience",
     label: "Experience",
     icon: (
@@ -45,13 +52,6 @@ const items: Item[] = [
         <circle cx="18" cy="12" r="2" />
         <path d="M6 8v8M8 6h6a4 4 0 014 4v0" />
       </>
-    ),
-  },
-  {
-    id: "projects",
-    label: "Projects",
-    icon: (
-      <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
     ),
   },
   {
@@ -118,62 +118,74 @@ export default function Sidebar() {
             href={`#${it.id}`}
             aria-label={it.label}
             aria-current={isActive ? "true" : undefined}
-            className="group relative flex items-center justify-center"
+            className="group relative flex items-center justify-center w-12 h-12"
           >
-            {isActive ? (
-              <span className="relative flex items-center justify-center w-12 h-12">
+            {/* inactive dot — fades out as item becomes active */}
+            <span
+              className={`absolute block w-1.5 h-1.5 rounded-full transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                isActive
+                  ? "opacity-0 scale-0 bg-[var(--accent)]"
+                  : "opacity-40 scale-100 bg-[var(--muted)] group-hover:opacity-100 group-hover:bg-[var(--accent)]"
+              }`}
+            />
+
+            {/* active chrome — rings + glass disc + icon, fades + scales in on activation */}
+            <span
+              aria-hidden={!isActive}
+              className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+                isActive
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-75 pointer-events-none"
+              }`}
+            >
+              <svg
+                aria-hidden
+                className="absolute inset-0 w-full h-full"
+                viewBox="0 0 48 48"
+              >
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="22"
+                  fill="none"
+                  stroke="rgba(254,110,0,0.25)"
+                  strokeWidth="1"
+                  strokeDasharray="2 4"
+                />
+                <g className="sidebar-dots-orbit">
+                  {Array.from({ length: 8 }).map((_, i) => {
+                    const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
+                    const cx = 24 + Math.cos(a) * 22;
+                    const cy = 24 + Math.sin(a) * 22;
+                    return (
+                      <circle
+                        key={i}
+                        cx={cx}
+                        cy={cy}
+                        r="1.6"
+                        fill="url(#sidebar-grad)"
+                      />
+                    );
+                  })}
+                </g>
+              </svg>
+              <span className="relative flex items-center justify-center w-9 h-9 rounded-full border border-[var(--border-accent)] bg-white/[0.06] backdrop-blur-md backdrop-saturate-150 shadow-[0_0_14px_rgba(254,110,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)]">
                 <svg
-                  aria-hidden
-                  className="absolute inset-0 w-full h-full"
-                  viewBox="0 0 48 48"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="url(#sidebar-grad)"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <circle
-                    cx="24"
-                    cy="24"
-                    r="22"
-                    fill="none"
-                    stroke="rgba(254,110,0,0.25)"
-                    strokeWidth="1"
-                    strokeDasharray="2 4"
-                  />
-                  <g className="sidebar-dots-orbit">
-                    {Array.from({ length: 8 }).map((_, i) => {
-                      const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
-                      const cx = 24 + Math.cos(a) * 22;
-                      const cy = 24 + Math.sin(a) * 22;
-                      return (
-                        <circle
-                          key={i}
-                          cx={cx}
-                          cy={cy}
-                          r="1.6"
-                          fill="url(#sidebar-grad)"
-                        />
-                      );
-                    })}
-                  </g>
+                  {it.icon}
                 </svg>
-                <span className="relative flex items-center justify-center w-9 h-9 rounded-full border border-[var(--border-accent)] bg-[var(--bg-2)]/85 shadow-[0_0_14px_rgba(254,110,0,0.45)]">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="url(#sidebar-grad)"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {it.icon}
-                  </svg>
-                </span>
               </span>
-            ) : (
-              <span className="flex items-center justify-center w-9 h-9">
-                <span className="block w-1.5 h-1.5 rounded-full bg-[var(--muted)] opacity-40 group-hover:opacity-100 group-hover:bg-[var(--accent)] transition-all" />
-              </span>
-            )}
-            <span className="absolute right-full mr-2 whitespace-nowrap text-[10px] font-mono px-2 py-1 border border-[var(--border-bright)] bg-[var(--bg-2)] text-[var(--muted)] opacity-0 group-hover:opacity-100 transition-opacity">
+            </span>
+
+            <span className="glass-tag absolute right-full mr-2 whitespace-nowrap text-[10px] font-mono px-2 py-1 rounded-sm border border-[var(--border-bright)] text-[var(--muted)] opacity-0 group-hover:opacity-100 transition-opacity">
               {it.label}
             </span>
           </a>

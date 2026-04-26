@@ -28,11 +28,24 @@ export default function About() {
           "radial-gradient(ellipse at 50% 0%, rgba(254,110,0,0.06), transparent 60%)",
       }}
     >
+      <div className="mb-3 flex items-center gap-3 text-[10px] font-mono uppercase tracking-[0.25em] text-[var(--gold)]">
+        <span className="block w-6 h-px bg-[var(--gold)]/60" />
+        <span>operator · 001</span>
+      </div>
       <SectionHeader hash="#" title="About.system" />
 
       <div className="grid lg:grid-cols-[280px_1fr] gap-4 mb-4 items-stretch">
         <div className="space-y-3 flex flex-col">
-          <div className="glass-panel rounded-md" data-parallax="0.04">
+          <div
+            className="glass-panel rounded-md relative"
+            data-parallax="0.04"
+          >
+            {/* gold corner brackets — luxury signature detail */}
+            <span className="absolute top-1 left-1 w-3 h-3 border-t border-l border-[var(--gold)]/70 pointer-events-none" />
+            <span className="absolute top-1 right-1 w-3 h-3 border-t border-r border-[var(--gold)]/70 pointer-events-none" />
+            <span className="absolute bottom-1 left-1 w-3 h-3 border-b border-l border-[var(--gold)]/70 pointer-events-none" />
+            <span className="absolute bottom-1 right-1 w-3 h-3 border-b border-r border-[var(--gold)]/70 pointer-events-none" />
+
             <div className="panel-header">
               <span className="tl-dot bg-[#fb2c36]" />
               <span className="tl-dot bg-[#ffcc00]" />

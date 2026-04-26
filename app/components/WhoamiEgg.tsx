@@ -75,7 +75,7 @@ export default function WhoamiEgg() {
       }}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
-      <div className="relative w-full max-w-xl panel shadow-soft">
+      <div className="relative w-full max-w-xl glass-panel rounded-md shadow-soft">
         <div className="panel-header">
           <span className="tl-dot bg-[#fb2c36]" />
           <span className="tl-dot bg-[#ffcc00]" />

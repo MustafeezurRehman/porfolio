@@ -252,7 +252,7 @@ export default function Projects() {
             delay={i * 80}
             className=""
           >
-            <ProjectCard p={p} onOpen={() => setActive(p)} />
+            <ProjectCard p={p} side={i % 2 === 0 ? "left" : "right"} onOpen={() => setActive(p)} />
           </Reveal>
         ))}
       </div>
@@ -265,9 +265,11 @@ export default function Projects() {
 function ProjectCard({
   p,
   onOpen,
+  side,
 }: {
   p: Project;
   onOpen: () => void;
+  side: "left" | "right";
 }) {
   const onEnter = () => {
     document.documentElement.style.setProperty("--cursor-accent", p.lang.color);
@@ -282,7 +284,13 @@ function ProjectCard({
       onPointerEnter={onEnter}
       onPointerLeave={onLeave}
       data-cursor="view"
-      className="glass-panel luxe-card rounded-md flex flex-col group overflow-hidden text-left"
+      className="glass-panel luxe-card rounded-md flex flex-col group overflow-hidden text-left transition-shadow duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      style={{
+        border: "none",
+        boxShadow: `
+          ${side === "left" ? "-12px" : "12px"} 0 24px -18px ${p.lang.color}28
+        `,
+      }}
     >
       <div className="luxe-thumb">
         <ProjectThumb variant={p.variant} color={p.lang.color} />

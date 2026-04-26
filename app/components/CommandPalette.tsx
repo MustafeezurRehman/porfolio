@@ -19,7 +19,7 @@ const ITEMS: Item[] = [
   { id: "projects", label: "projects.repo", hint: "Pinned work", href: "#projects", group: "Section" },
   { id: "blogs", label: "blogs.md", hint: "Writings", href: "#blogs", group: "Section" },
   { id: "contact", label: "contact.exe", hint: "Get in touch", href: "#contact", group: "Section" },
-  { id: "hire", label: "Hire me", hint: "Send a direct email", href: "mailto:mustafizurrehman@hotmail.com", group: "Action" },
+  { id: "hire", label: "Hire me", hint: "Jump to the contact section", href: "#contact", group: "Action" },
   { id: "linkedin", label: "LinkedIn", hint: "/in/mustafeez-ur-rehman", href: "https://linkedin.com/in/mustafeez-ur-rehman", group: "External" },
   { id: "github", label: "GitHub", hint: "github.com", href: "https://github.com/", group: "External" },
 ];
@@ -113,7 +113,7 @@ export default function CommandPalette({
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
       <div
-        className="relative w-full max-w-xl panel shadow-soft"
+        className="relative w-full max-w-xl glass-panel rounded-md shadow-soft"
         onKeyDown={onKey}
       >
         <div className="panel-header">

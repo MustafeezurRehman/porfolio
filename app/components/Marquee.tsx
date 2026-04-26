@@ -27,7 +27,7 @@ export default function Marquee() {
   return (
     <section
       aria-label="Highlights"
-      className="relative border-y border-[var(--border-bright)] bg-[var(--bg-2)]/40 overflow-hidden py-4"
+      className="relative border-y border-white/10 bg-white/[0.025] backdrop-blur-xl backdrop-saturate-150 overflow-hidden py-4"
     >
       <div
         className="flex marquee-track"

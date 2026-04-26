@@ -1,3 +1,7 @@
+"use client";
+
+import usePauseSvgOffScreen from "./usePauseSvgOffScreen";
+
 type Variant = "deploy" | "ai" | "ui" | "tools" | "crypto" | "mfe";
 
 export default function ProjectThumb({
@@ -7,8 +11,10 @@ export default function ProjectThumb({
   variant: Variant;
   color: string;
 }) {
+  const wrapRef = usePauseSvgOffScreen<HTMLDivElement>();
   return (
     <div
+      ref={wrapRef}
       className="aspect-[16/8] relative overflow-hidden"
       style={{
         background: `
@@ -16,8 +22,6 @@ export default function ProjectThumb({
           radial-gradient(120% 110% at 0% 0%, ${color}33, transparent 55%),
           radial-gradient(140% 110% at 100% 100%, ${color}1f, transparent 60%)
         `,
-        borderBottom: "1px solid rgba(255,255,255,0.1)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12)",
       }}
     >
       <div

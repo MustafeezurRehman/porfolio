@@ -349,7 +349,7 @@ export default function Skills() {
       <div
         ref={stageRef}
         data-cursor="grab"
-        className="relative w-full h-[380px] sm:h-[460px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-8 sm:mt-8 cursor-grab active:cursor-grabbing select-none touch-none"
+        className="relative w-full h-[420px] sm:h-[490px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-8 sm:mt-8 cursor-grab active:cursor-grabbing select-none touch-none"
         style={{ perspective: "1200px" }}
       >
         <svg

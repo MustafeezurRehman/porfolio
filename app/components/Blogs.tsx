@@ -1,5 +1,8 @@
+"use client";
+
 import Reveal from "./Reveal";
 import SectionHeader from "./SectionHeader";
+import usePauseSvgOffScreen from "./usePauseSvgOffScreen";
 
 type Post = {
   title: string;
@@ -48,7 +51,7 @@ export default function Blogs() {
   return (
     <section
       id="blogs"
-      className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative"
+      className="hidden md:block max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 relative"
       style={{
         backgroundImage:
           "radial-gradient(ellipse at 50% 0%, rgba(189,147,249,0.04), transparent 60%)",
@@ -154,8 +157,10 @@ export default function Blogs() {
 }
 
 function BlogThumb({ variant, color }: { variant: Post["variant"]; color: string }) {
+  const wrapRef = usePauseSvgOffScreen<HTMLDivElement>();
   return (
     <div
+      ref={wrapRef}
       className="aspect-[16/8] relative overflow-hidden"
       style={{
         background: `

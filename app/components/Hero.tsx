@@ -52,7 +52,7 @@ export default function Hero() {
 
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="space-y-8">
-          <div className="inline-flex items-center gap-2 text-[11px] font-mono px-3 py-1.5 border border-[var(--border-accent)] bg-[var(--bg-2)]">
+          <div className="glass inline-flex items-center gap-2 text-[11px] font-mono px-3 py-1.5 rounded-sm border-[var(--border-accent)]">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] status-pulse" />
             <span className="text-[var(--accent)]">SYSTEM.KERNEL</span>
             <span className="text-[var(--dim)]">::</span>
@@ -116,19 +116,29 @@ export default function Hero() {
             across the UAE.
           </p>
 
-          <div className="flex flex-wrap sm:flex-nowrap items-stretch gap-3">
-            <Magnetic className="w-full sm:w-auto">
+          <div className="flex flex-wrap sm:flex-nowrap items-stretch gap-5">
+            <Magnetic strength={0.04} className="w-full sm:w-auto">
             <a
-              href="#about"
-              className="group relative flex items-stretch overflow-hidden h-full border border-[var(--accent)] bg-[var(--bg-2)] hover:bg-[var(--bg-3)] transition-colors w-full sm:w-[360px]"
+              href="/Mustafeez-Ur-Rehman-Resume.pdf"
+              download
+              className="group relative flex items-stretch overflow-hidden h-full rounded-md border border-[var(--accent)]/70 bg-white/[0.04] hover:bg-white/[0.07] hover:border-[var(--accent)] backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 w-full sm:w-[360px] shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_8px_28px_rgba(254,110,0,0.12)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_12px_32px_rgba(254,110,0,0.24)]"
             >
-              <div className="flex items-center justify-center w-12 sm:w-14 bg-[var(--accent)]/15 border-r border-[var(--accent)] text-[var(--accent)] text-xl">
+              {/* shimmer sweep */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[900ms] ease-out"
+                style={{
+                  background:
+                    "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%)",
+                }}
+              />
+              <div className="flex items-center justify-center w-12 sm:w-14 bg-[var(--accent)]/15 group-hover:bg-[var(--accent)]/30 border-r border-[var(--accent)] text-[var(--accent)] text-xl transition-colors">
                 {">_"}
               </div>
-              <div className="flex-1 px-4 py-2.5">
+              <div className="flex-1 px-4 py-2.5 relative">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-white font-bold text-sm">
-                    Initialize OS
+                  <span className="text-white font-bold text-sm group-hover:text-[var(--accent)] transition-colors">
+                    Read My Source
                   </span>
                   <svg
                     width="14"
@@ -137,9 +147,13 @@ export default function Hero() {
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                    className="text-[var(--accent)]"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-[var(--accent)] transition-transform duration-300 group-hover:translate-y-0.5 group-hover:scale-110"
                   >
-                    <path d="M7 17L17 7M9 7h8v8" />
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <path d="M7 10l5 5 5-5" />
+                    <path d="M12 15V3" />
                   </svg>
                 </div>
                 <div className="mt-1 h-1 bg-[var(--bg-3)] rounded-full overflow-hidden">
@@ -153,35 +167,64 @@ export default function Hero() {
                   />
                 </div>
                 <div className="flex items-center justify-between mt-1 text-[10px] text-[var(--muted)] font-mono">
-                  <span>{"> sudo boot_gui"}</span>
+                  <span>{"$ cat ~/resume.pdf"}</span>
                   <span>
-                    Loading
-                    <span className="dot-1">.</span>
-                    <span className="dot-2">.</span>
-                    <span className="dot-3">.</span>
+                    9+ yrs<span className="text-[var(--accent)]"> · </span>UAE
                   </span>
                 </div>
               </div>
             </a>
             </Magnetic>
 
-            <Magnetic className="hidden sm:flex">
+            <Magnetic strength={0.04} className="hidden sm:flex">
             <a
               href="https://github.com/"
               target="_blank"
               rel="noreferrer"
-              className="group flex items-stretch h-full border border-[var(--border-bright)] bg-[var(--bg-2)] hover:border-[var(--accent)] transition-colors"
+              className="group relative flex items-stretch overflow-hidden h-full rounded-md border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-[var(--accent)]/70 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_6px_22px_rgba(0,0,0,0.35)] hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_10px_28px_rgba(0,0,0,0.45),0_0_14px_rgba(254,110,0,0.14)]"
             >
-              <div className="flex items-center justify-center w-12 sm:w-14 border-r border-[var(--border-bright)] text-[var(--muted)] group-hover:text-[var(--accent)]">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              {/* shimmer sweep */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-[900ms] ease-out"
+                style={{
+                  background:
+                    "linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.14) 50%, transparent 70%)",
+                }}
+              />
+              <div className="flex items-center justify-center w-12 sm:w-14 border-r border-[var(--border-bright)] text-[var(--muted)] group-hover:text-[var(--accent)] transition-colors">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="transition-transform duration-500 group-hover:scale-110 group-hover:rotate-[8deg]"
+                >
                   <path d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 007.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.74 1.27 3.4.97.1-.76.4-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.04 11.04 0 015.79 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.7.41.35.78 1.05.78 2.12v3.14c0 .31.21.66.8.55A11.5 11.5 0 0023.5 12C23.5 5.65 18.35.5 12 .5z" />
                 </svg>
               </div>
-              <div className="px-4 py-2.5 flex flex-col justify-center">
-                <span className="text-[10px] text-[var(--muted)]">
-                  Check out
-                </span>
-                <span className="text-white font-bold text-sm">GitHub</span>
+              <div className="relative px-4 py-2.5 flex items-center gap-2">
+                <div className="flex flex-col justify-center">
+                  <span className="text-[10px] text-[var(--muted)] group-hover:text-[var(--accent)]/80 transition-colors">
+                    Check out
+                  </span>
+                  <span className="text-white font-bold text-sm group-hover:text-[var(--accent)] transition-colors">
+                    GitHub
+                  </span>
+                </div>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[var(--accent)] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                >
+                  <path d="M5 19L19 5M9 5h10v10" />
+                </svg>
               </div>
             </a>
             </Magnetic>
@@ -205,7 +248,7 @@ export default function Hero() {
         </div>
 
         <div className="lg:sticky lg:top-32" data-parallax="0.06" data-tilt="true">
-          <div className="panel rounded-md shadow-[0_0_60px_rgba(254,110,0,0.08)]">
+          <div className="glass-panel rounded-md shadow-[0_0_60px_rgba(254,110,0,0.08)]">
             <div className="panel-header rounded-t-md">
               <span className="tl-dot bg-[#fb2c36]" />
               <span className="tl-dot bg-[#ffcc00]" />
@@ -259,21 +302,6 @@ export default function Hero() {
           <path d="M6 9l6 6 6-6" />
         </svg>
       </a>
-
-      <div
-        aria-hidden
-        className="hidden md:flex fixed bottom-6 right-6 z-30 items-center gap-2 scroll-avatar"
-      >
-        <div className="relative">
-          <div className="w-12 h-12 rounded-full border border-[var(--accent)] bg-[var(--bg-2)] overflow-hidden flex items-center justify-center text-[var(--accent)] font-bold">
-            <svg viewBox="0 0 100 100" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <circle cx="50" cy="40" r="14" />
-              <path d="M22 86c2-14 14-24 28-24s26 10 28 24" />
-            </svg>
-          </div>
-          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-[var(--green)] border-2 border-[var(--background)] status-pulse" />
-        </div>
-      </div>
 
       <style jsx>{`
         .name-gradient {
