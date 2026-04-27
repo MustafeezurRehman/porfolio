@@ -156,6 +156,8 @@ export default function Skills() {
 
   const sphereRef = useRef<HTMLDivElement | null>(null);
   const stageRef = useRef<HTMLDivElement | null>(null);
+  const dragZoneRef = useRef<HTMLDivElement | null>(null);
+  const pillRef = useRef<HTMLDivElement | null>(null);
   const linesRef = useRef<SVGSVGElement | null>(null);
   const [radius, setRadius] = useState(RADIUS_MAX);
   const radiusRef = useRef(RADIUS_MAX);
@@ -292,28 +294,50 @@ export default function Skills() {
   }, [sphere]);
 
   useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
+    const dragZone = dragZoneRef.current;
+    const pill = pillRef.current;
+    if (!dragZone) return;
+
+    const handles: HTMLElement[] = [dragZone];
+    if (pill) handles.push(pill);
 
     const onDown = (e: PointerEvent) => {
+      const target = e.currentTarget as HTMLElement;
       drag.current.active = true;
       drag.current.sx = e.clientX;
       drag.current.sy = e.clientY;
       drag.current.rx = rot.current.x;
       drag.current.ry = rot.current.y;
-      stage.setPointerCapture(e.pointerId);
+      target.setPointerCapture(e.pointerId);
     };
     const onMove = (e: PointerEvent) => {
-      if (!drag.current.active) return;
-      const dx = e.clientX - drag.current.sx;
-      const dy = e.clientY - drag.current.sy;
-      rot.current.y = drag.current.ry + dx * 0.4;
-      rot.current.x = drag.current.rx - dy * 0.4;
+      if (drag.current.active) {
+        const dx = e.clientX - drag.current.sx;
+        const dy = e.clientY - drag.current.sy;
+        rot.current.y = drag.current.ry + dx * 0.4;
+        rot.current.x = drag.current.rx - dy * 0.4;
+        return;
+      }
+      if (e.pointerType !== "mouse") return;
+      const sp = sphereRef.current;
+      if (!sp) return;
+      let nearest: { name: string; d: number } | null = null;
+      sp.querySelectorAll<HTMLElement>("[data-skill-node]").forEach((node) => {
+        const r = node.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const d = Math.hypot(e.clientX - cx, e.clientY - cy);
+        if (d < 28 && (!nearest || d < nearest.d)) {
+          nearest = { name: node.dataset.skillName || "", d };
+        }
+      });
+      setHover(nearest ? (nearest as { name: string; d: number }).name : null);
     };
     const onUp = (e: PointerEvent) => {
+      const target = e.currentTarget as HTMLElement;
       drag.current.active = false;
       try {
-        stage.releasePointerCapture(e.pointerId);
+        target.releasePointerCapture(e.pointerId);
       } catch {}
     };
     const onLeave = () => {
@@ -321,17 +345,21 @@ export default function Skills() {
       mouseActive.current = false;
     };
 
-    stage.addEventListener("pointerdown", onDown);
-    stage.addEventListener("pointermove", onMove);
-    stage.addEventListener("pointerup", onUp);
-    stage.addEventListener("pointercancel", onUp);
-    stage.addEventListener("pointerleave", onLeave);
+    handles.forEach((h) => {
+      h.addEventListener("pointerdown", onDown);
+      h.addEventListener("pointermove", onMove);
+      h.addEventListener("pointerup", onUp);
+      h.addEventListener("pointercancel", onUp);
+      h.addEventListener("pointerleave", onLeave);
+    });
     return () => {
-      stage.removeEventListener("pointerdown", onDown);
-      stage.removeEventListener("pointermove", onMove);
-      stage.removeEventListener("pointerup", onUp);
-      stage.removeEventListener("pointercancel", onUp);
-      stage.removeEventListener("pointerleave", onLeave);
+      handles.forEach((h) => {
+        h.removeEventListener("pointerdown", onDown);
+        h.removeEventListener("pointermove", onMove);
+        h.removeEventListener("pointerup", onUp);
+        h.removeEventListener("pointercancel", onUp);
+        h.removeEventListener("pointerleave", onLeave);
+      });
     };
   }, []);
 
@@ -348,8 +376,7 @@ export default function Skills() {
 
       <div
         ref={stageRef}
-        data-cursor="grab"
-        className="relative w-full h-[420px] sm:h-[490px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-8 sm:mt-8 cursor-grab active:cursor-grabbing select-none touch-none"
+        className="relative w-full h-[420px] sm:h-[490px] md:h-[560px] lg:h-[660px] xl:h-[780px] mt-8 sm:mt-8 select-none"
         style={{ perspective: "1200px" }}
       >
         <svg
@@ -404,13 +431,12 @@ export default function Skills() {
                 <div
                   key={s.name}
                   data-skill-node
+                  data-skill-name={s.name}
                   data-translate={translate}
                   data-x={x}
                   data-y={y}
                   data-z={z}
-                  onMouseEnter={() => setHover(s.name)}
-                  onMouseLeave={() => setHover(null)}
-                  className="absolute top-0 left-0"
+                  className="absolute top-0 left-0 pointer-events-none"
                   style={{
                     transform: translate,
                     transformStyle: "preserve-3d",
@@ -460,7 +486,21 @@ export default function Skills() {
           </div>
         </div>
 
-        <div className="glass absolute -bottom-14 sm:-bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full text-[var(--muted)] text-xs font-mono">
+        <div
+          ref={dragZoneRef}
+          data-cursor="grab"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full touch-none cursor-grab active:cursor-grabbing"
+          style={{
+            width: (radius + 40) * 2,
+            height: (radius + 40) * 2,
+          }}
+        />
+
+        <div
+          ref={pillRef}
+          data-cursor="grab"
+          className="glass absolute -bottom-14 sm:-bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full text-[var(--muted)] text-xs font-mono touch-none cursor-grab active:cursor-grabbing select-none"
+        >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="12" cy="12" r="10" />
             <path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20" />
