@@ -4,6 +4,7 @@ import "./globals.css";
 import CustomCursor from "./components/CustomCursor";
 import SmoothScroll from "./components/SmoothScroll";
 import WhoamiEgg from "./components/WhoamiEgg";
+import { Analytics } from "@vercel/analytics/next"
 
 const fira = Fira_Code({
   variable: "--font-fira",
@@ -103,6 +104,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
         />
+        <Analytics/>
         <SmoothScroll />
         <CustomCursor />
         <WhoamiEgg />
