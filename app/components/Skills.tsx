@@ -65,10 +65,10 @@ const skills: Skill[] = [
 const RADIUS_MAX = 270;
 
 function pickRadius(w: number) {
-  if (w < 380) return 140;
-  if (w < 480) return 165;
-  if (w < 640) return 190;
-  if (w < 768) return 215;
+  if (w < 380) return 115;
+  if (w < 480) return 140;
+  if (w < 640) return 175;
+  if (w < 768) return 210;
   if (w < 1024) return 240;
   return RADIUS_MAX;
 }
@@ -366,7 +366,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 sm:py-20 md:py-28 lg:py-36"
+      className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 pb-24 sm:py-20 md:py-28 lg:py-36 overflow-x-clip"
       style={{
         backgroundImage:
           "radial-gradient(ellipse at 50% 0%, rgba(48,128,255,0.05), transparent 60%)",
