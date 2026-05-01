@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Fira_Code, Inter } from "next/font/google";
+import { Cormorant_Garamond, Fira_Code } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "./components/CustomCursor";
 import SmoothScroll from "./components/SmoothScroll";
@@ -9,18 +9,14 @@ import { Analytics } from "@vercel/analytics/next"
 const fira = Fira_Code({
   variable: "--font-fira",
   subsets: ["latin"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 const siteUrl = "https://mustafeez.dev";
@@ -105,7 +101,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fira.variable} ${inter.variable} ${cormorant.variable} h-full w-full overflow-x-clip antialiased`}
+      className={`${fira.variable} ${cormorant.variable} h-full w-full overflow-x-clip antialiased`}
     >
       <body className="min-h-full w-full overflow-x-clip flex flex-col">
         <script

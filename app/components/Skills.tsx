@@ -180,8 +180,14 @@ export default function Skills() {
     rx: number;
     ry: number;
   }>({ active: false, sx: 0, sy: 0, rx: 0, ry: 0 });
-  const mouseActive = useRef(false);
+  const mouse = useRef({ active: false, x: 0, y: 0 });
+  const hoverRef = useRef<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
+  const setHoverIfChanged = (name: string | null) => {
+    if (hoverRef.current === name) return;
+    hoverRef.current = name;
+    setHover(name);
+  };
 
   useEffect(() => {
     let raf = 0;
@@ -266,6 +272,8 @@ export default function Skills() {
         el.style.transform = `rotateX(${rot.current.x}deg) rotateY(${rot.current.y}deg)`;
       }
       const nodes = el?.querySelectorAll<HTMLElement>("[data-skill-node]");
+      const wantHover = mouse.current.active && !drag.current.active;
+      let nearest: { name: string; d: number } | null = null;
       nodes?.forEach((node) => {
         const x = parseFloat(node.dataset.x || "0");
         const y = parseFloat(node.dataset.y || "0");
@@ -282,7 +290,30 @@ export default function Skills() {
         const inner = node.firstElementChild as HTMLElement | null;
         if (inner) inner.style.setProperty("--depth-scale", scale.toFixed(3));
         void x1;
+
+        if (wantHover && depth > 0.4 && inner) {
+          const r = inner.getBoundingClientRect();
+          const px = mouse.current.x;
+          const py = mouse.current.y;
+          const pad = 8;
+          if (
+            px >= r.left - pad &&
+            px <= r.right + pad &&
+            py >= r.top - pad &&
+            py <= r.bottom + pad
+          ) {
+            const cx = r.left + r.width / 2;
+            const cy = r.top + r.height / 2;
+            const d = Math.hypot(px - cx, py - cy);
+            if (!nearest || d < nearest.d) {
+              nearest = { name: node.dataset.skillName || "", d };
+            }
+          }
+        }
       });
+      if (wantHover) {
+        setHoverIfChanged(nearest ? (nearest as { name: string; d: number }).name : null);
+      }
 
       raf = requestAnimationFrame(loop);
     };
@@ -319,19 +350,9 @@ export default function Skills() {
         return;
       }
       if (e.pointerType !== "mouse") return;
-      const sp = sphereRef.current;
-      if (!sp) return;
-      let nearest: { name: string; d: number } | null = null;
-      sp.querySelectorAll<HTMLElement>("[data-skill-node]").forEach((node) => {
-        const r = node.getBoundingClientRect();
-        const cx = r.left + r.width / 2;
-        const cy = r.top + r.height / 2;
-        const d = Math.hypot(e.clientX - cx, e.clientY - cy);
-        if (d < 28 && (!nearest || d < nearest.d)) {
-          nearest = { name: node.dataset.skillName || "", d };
-        }
-      });
-      setHover(nearest ? (nearest as { name: string; d: number }).name : null);
+      mouse.current.active = true;
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
     };
     const onUp = (e: PointerEvent) => {
       const target = e.currentTarget as HTMLElement;
@@ -342,7 +363,8 @@ export default function Skills() {
     };
     const onLeave = () => {
       drag.current.active = false;
-      mouseActive.current = false;
+      mouse.current.active = false;
+      setHoverIfChanged(null);
     };
 
     handles.forEach((h) => {
