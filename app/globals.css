@@ -56,7 +56,7 @@
 html, body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-fira), "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Fira Code", var(--font-fira), monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "calt" 1, "liga" 1;

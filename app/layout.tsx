@@ -10,6 +10,15 @@ const fira = Fira_Code({
   variable: "--font-fira",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
+  fallback: [
+    "ui-monospace",
+    "SFMono-Regular",
+    "Menlo",
+    "Monaco",
+    "Consolas",
+    "monospace",
+  ],
 });
 
 const cormorant = Cormorant_Garamond({
@@ -17,6 +26,8 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
+  preload: false,
+  fallback: ["Cormorant Garamond", "EB Garamond", "Georgia", "serif"],
 });
 
 const siteUrl = "https://mustafeez.dev";
